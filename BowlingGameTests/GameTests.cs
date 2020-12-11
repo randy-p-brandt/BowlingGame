@@ -1,17 +1,18 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Namespace_1;
+using BowlingGame;
+
 
 namespace BowlingGameTests
 {
     [TestClass]
     public class GameTests
     {
-        private Namespace_1.Class1 game;
+        private Bowling game;
 
         [TestInitialize]
         public void Initialize()
         {
-            game = new Class1();
+            game = new Bowling();
         }
 
         [TestMethod]
@@ -43,6 +44,56 @@ namespace BowlingGameTests
                 game.Roll(0);
 
             Assert.AreEqual(16, game.Score());
+        }
+
+        [TestMethod]
+        public void TestOneStrike()
+        {
+            game.Roll(10);
+            for (int lcv = 1; lcv < 20; lcv++)
+            {
+                game.Roll(0);
+            }
+            Assert.AreEqual(10, game.Score());
+        }
+
+        [TestMethod]
+        public void TestSpareInTenthFrame()
+        {
+            for (int lcv = 0; lcv < 18; lcv++)
+            {
+                game.Roll(0);
+            }
+            game.Roll(2);
+            game.Roll(8);
+            game.Roll(7);
+
+            Assert.AreEqual(17, game.Score());
+        }
+
+        [TestMethod]
+        public void TestStrikeInTenthFrame()
+        {
+            for (int lcv = 0; lcv < 18; lcv++)
+            {
+                game.Roll(0);
+            }
+
+            game.Roll(10);
+            game.Roll(2);
+            game.Roll(7);
+            Assert.AreEqual(19, game.Score());
+        }
+
+        [TestMethod]
+        public void TestPerfectGame()
+        {
+            for (int lcv = 0; lcv <12; lcv++)
+            {
+                game.Roll(10);
+            }
+
+            Assert.AreEqual(300, game.Score());
         }
     }
 }

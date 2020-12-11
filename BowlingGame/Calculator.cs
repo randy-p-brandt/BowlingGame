@@ -16,23 +16,28 @@
 
         public void GetScoreForAllRollsInGame(ref int score)
         {
-            int i = 0;
+            int box = 0;
 
-            for (int f = 0; f < 10; f++)
+            for (int frame = 0; frame < 10; frame++)
             {
-                // spares
-                if (rolls[i] + rolls[i + 1] == 10)
+                // strikes
+                if (rolls[box] == 10)
                 {
-                    score += 10 + rolls[i + 2];
-                    i++;
+                    score += rolls[box] + rolls[box +1] + rolls[box + 2];
+                    box++;
+                }
+                // spare
+                else if (rolls[box] != 10 &&
+                    rolls[box] + rolls[box + 1] == 10) 
+                {
+                    score += 10 + rolls[box + 2];
+                    box+= 2;
                 }
                 else
                 {
-                    score += rolls[i] + rolls[i + 1];
-                    i++;
+                    score += rolls[box] + rolls[box + 1];
+                    box+= 2;
                 }
-
-                i++;
             }
         }
     }

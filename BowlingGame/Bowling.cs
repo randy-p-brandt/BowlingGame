@@ -1,8 +1,6 @@
-﻿using BowlingGame;
-
-namespace Namespace_1
+﻿namespace BowlingGame
 {
-    public class Class1
+    public class Bowling
     {
         // initializes rolls array
         public int[] rolls = new int[21];
